@@ -1,0 +1,38 @@
+let saque;
+
+do {
+  saque = prompt("Digite o valor que deseja sacar (entre R$10 e R$600):");
+} while (isNaN(saque) || saque === "" || saque < 10 || saque > 600);
+
+saque = parseInt(saque);
+
+if (saque < 10 || saque > 600) {
+  alert(
+    "Valor de saque inválido. Por favor, digite um valor entre R$10 e R$600."
+  );
+} else {
+  const notas = [100, 50, 10, 5, 1];
+
+  const resultado = {
+    100: 0,
+    50: 0,
+    10: 0,
+    5: 0,
+    1: 0,
+  };
+
+  for (const element of notas) {
+    while (saque >= element) {
+      saque -= element;
+      resultado[element]++;
+    }
+  }
+
+  let mensagem = "Notas fornecidas:\n";
+  for (let nota in resultado) {
+    if (resultado[nota] > 0) {
+      mensagem += resultado[nota] + " nota(s) de R$" + nota + "\n";
+    }
+  }
+  alert(mensagem);
+}
